@@ -1,6 +1,4 @@
 import AuthProvider from "@/components/AuthProvider";
-import ClientWrapper from "@/components/ClientWrapper";
-import Navbar from "@/components/Navbar";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -16,12 +14,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <AuthProvider>
         <body className={`${inter.className} bg-gray-600 pt-2 lg:p-2`}>
-          <ClientWrapper>
+          {/* <ClientWrapper>
             <div className="relative max-w-[700px] rounded-xl mx-auto bg-slate-900 text-white  min-h-screen">
               <Navbar />
               {children}
             </div>
-          </ClientWrapper>
+          </ClientWrapper> */}
         </body>
       </AuthProvider>
     </html>
