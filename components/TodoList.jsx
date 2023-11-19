@@ -1,11 +1,18 @@
+import { getServerSession } from 'next-auth/next';
 import { connectToDB } from './connectToDb';
-import { Todo } from './modals';
+import { Todo, User } from './modals';
+import { options } from './options';
 import SingleTodo from './singleTodo';
 
 const getTodos = async() => {
   connectToDB()
-  const todos = await Todo.find();
-  return todos;
+  const session = await getServerSession(options)
+  const user = await User.findOne({email:session.user.email});
+  if(user._id){
+    const todos = await Todo.find({userId:user._id})
+    console.log(todos)
+    return todos;
+  }
 }
 
 const TodoList = async() => {

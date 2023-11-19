@@ -1,17 +1,23 @@
-
+import { getServerSession } from 'next-auth/next'
 import { revalidatePath } from 'next/cache'
 import { connectToDB } from './connectToDb'
-import { Todo } from './modals'
-const AddTodo = () => {
+import { Todo, User } from './modals'
+import { options } from './options'
+const AddTodo = async() => {
 
 const create = async(formData) => {
     'use server'
-    try {
-     const data = formData.get('content')
 
+    try {
       connectToDB()
-      await Todo.create({body:data});
-      revalidatePath('/')
+     const data = formData.get('content')
+     const session = await getServerSession(options)
+     const user = await User.findOne({email:session.user.email});
+     console.log(user._id, 'addtodo')
+      if(user){
+        await Todo.create({body:data, userId:user._id});
+        revalidatePath('/')
+      }
     } catch (error) {
       console.log(error.message)
     }
