@@ -13,7 +13,6 @@ const create = async(formData) => {
      const data = formData.get('content')
      const session = await getServerSession(options)
      const user = await User.findOne({email:session.user.email});
-     console.log(user._id, 'addtodo')
       if(user){
         await Todo.create({body:data, userId:user._id});
         revalidatePath('/')

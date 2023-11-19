@@ -43,9 +43,9 @@ const SingleTodo = ({id,completed,body}) => {
     <>
             <li className={completed ?"line-through mt-2 flex items-center p-2 text-xl gap-2 border rounded border-gray-700 cursor-pointer" :"flex items-center p-2 text-xl gap-2 mt-2 border rounded border-gray-200 cursor-pointer"}>
                 <span onClick={handleComplete} className='flex-1 text-gray-300'>{body}</span>
-                <buton className='m-2' onClick={() => setOpen(!open)}>{<AiFillEdit/>}</buton>
-                <buttton className='m-2' onClick={handleComplete}>{<AiOutlineCheck />}</buttton>
-                <button className='m-2' onClick={handleDelete}>{<AiFillDelete />}</button>
+                <buton className='m-2' onClick={() => setOpen(!open)}><AiFillEdit/></buton>
+                <buttton className='m-2' onClick={handleComplete}><AiOutlineCheck /></buttton>
+                <button className='m-2' onClick={handleDelete}><AiFillDelete /></button>
             </li>
             {open && <Modal closeModal={closeModal} id={id} body={body}/>}
     </>
